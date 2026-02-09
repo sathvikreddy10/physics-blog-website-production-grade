@@ -12,6 +12,7 @@ export default function BlogCard_3_medium({ data }) {
   const handleNavigation = (e) => {
     e.preventDefault();
     setIsNavigating(true);
+    // Wait for the orange curtain to cover the screen before pushing
     setTimeout(() => { router.push(`/blog/${data?.id}`); }, 400);
   };
 
@@ -33,9 +34,16 @@ export default function BlogCard_3_medium({ data }) {
 
   return (
     <>
+      {/* 1. ORANGE CURTAIN POP */}
       <AnimatePresence>
         {isNavigating && (
-            <motion.div initial={{ y: "100%" }} animate={{ y: "0%" }} exit={{ y: "100%" }} transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-[9999] bg-[#FFA443]" />
+            <motion.div 
+                initial={{ y: "100%" }} 
+                animate={{ y: "0%" }} 
+                exit={{ y: "100%" }} 
+                transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }} 
+                className="fixed inset-0 z-[99999] bg-[#FFA443]" 
+            />
         )}
       </AnimatePresence>
 
@@ -46,8 +54,14 @@ export default function BlogCard_3_medium({ data }) {
             w-[22.95rem] h-[22.5rem] 
             flex flex-col px-6 py-2 
             relative overflow-hidden items-center 
+            
+            /* 👇 RESTORED BORDERS */
+            border border-[#c3c3c3bc] 
+            hover:border-[#FFA443]
+
             bg-white hover:bg-[#FFA443]
             transition-colors duration-75 ease-linear
+            
             transform will-change-transform
             hover:-translate-y-1 
             transition-transform duration-200 cubic-bezier(0.34, 1.56, 0.64, 1)

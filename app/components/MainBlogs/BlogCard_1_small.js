@@ -10,16 +10,13 @@ export default function BlogCard_1_small({ data }) {
   const [isNavigating, setIsNavigating] = useState(false);
 
   const handleNavigation = (e) => {
-    e.preventDefault(); // Stop default link behavior
-    setIsNavigating(true); // Trigger animation
-
-    // Wait 400ms for animation to cover screen, then push route
+    e.preventDefault(); 
+    setIsNavigating(true); 
     setTimeout(() => {
         router.push(`/blog/${data?.id}`);
     }, 400);
   };
 
-  // --- Helpers ---
   const getCoverImage = () => {
     if (!data?.content) return photo.src;
     const imgBlock = data.content.find(b => b.image && b.image.length > 0);
@@ -38,7 +35,7 @@ export default function BlogCard_1_small({ data }) {
 
   return (
     <>
-      {/* 1. THE CURTAIN (Fixed to Viewport) */}
+      {/* 1. ORANGE CURTAIN POP */}
       <AnimatePresence>
         {isNavigating && (
             <motion.div
@@ -46,25 +43,26 @@ export default function BlogCard_1_small({ data }) {
                 animate={{ y: "0%" }}
                 exit={{ y: "100%" }}
                 transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-                className="fixed inset-0 z-[9999] bg-[#FFA443]"
+                className="fixed inset-0 z-[99999] bg-[#FFA443]"
             />
         )}
       </AnimatePresence>
 
-      {/* 2. THE CARD CONTAINER (Handles Click) */}
       <div onClick={handleNavigation} className="cursor-pointer group relative z-10">
-        
-        {/* 3. THE BOUNCING CONTENT (Inner Wrapper) */}
         <div className="
             BlogCard_small 
             rounded-[1.5rem] 
             w-[21.55rem] h-[22.5rem] 
             flex flex-col px-7 py-2 
             relative overflow-hidden items-center 
+            
+            /* 👇 BORDERS RESTORED */
+            border border-[#c3c3c3bc] 
+            hover:border-[#FFA443]
+
             bg-white hover:bg-[#FFA443] 
             transition-colors duration-75 ease-linear
 
-            /* Move Transform here so it doesn't trap the fixed overlay */
             transform will-change-transform
             hover:-translate-y-1 
             transition-transform duration-200 cubic-bezier(0.34, 1.56, 0.64, 1)
