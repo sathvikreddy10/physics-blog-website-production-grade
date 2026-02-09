@@ -1,81 +1,121 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link' // Import Link
+import { useRouter } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion'
 import photo from "./placeholder.png"
 
 export default function BlogCard_1_small({ data }) {
+  const router = useRouter();
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  // --- LOGIC ---
+  const handleNavigation = (e) => {
+    e.preventDefault(); // Stop default link behavior
+    setIsNavigating(true); // Trigger animation
+
+    // Wait 400ms for animation to cover screen, then push route
+    setTimeout(() => {
+        router.push(`/blog/${data?.id}`);
+    }, 400);
+  };
+
+  // --- Helpers ---
   const getCoverImage = () => {
     if (!data?.content) return photo.src;
     const imgBlock = data.content.find(b => b.image && b.image.length > 0);
     return imgBlock ? imgBlock.image : photo.src;
   };
-
   const getExcerpt = () => {
     if (!data?.content) return "No description available.";
     const textBlock = data.content.find(b => b.text && b.text.trim().length > 0);
     return textBlock ? textBlock.text.replace(/<[^>]+>/g, '') : "";
   };
-
   const formatDate = (dateString) => {
     if(!dateString) return "";
     const date = new Date(dateString);
-    const month = date.toLocaleDateString('en-US', { month: 'short' });
-    const day = date.getDate();
-    const year = date.toLocaleDateString('en-US', { year: '2-digit' });
-    return `${month} ${day}/${year}`;
+    return `${date.toLocaleDateString('en-US', { month: 'short' })} ${date.getDate()}/${date.toLocaleDateString('en-US', { year: '2-digit' })}`;
   };
-  // --- END LOGIC ---
 
   return (
-    // CHANGED: Outer div is now a Link. CSS classes are identical.
-    <Link 
-        href={`/blog/${data?.id}`}
-        className="BlogCard_small border border-[#c3c3c3bc] rounded-[1.5rem] w-[21.55rem] h-[22.5rem] flex flex-col px-7 py-2 relative overflow-hidden items-center hover:shadow-lg transition-shadow duration-300"
-    >
-        
-        <div className="image_container w-full h-[33.80%] rounded-lg relative overflow-hidden mt-[0.35rem]">
-           <Image 
-                src={getCoverImage()} 
-                fill={true} 
-                alt="image" 
-                className="object-cover"
+    <>
+      {/* 1. THE CURTAIN (Fixed to Viewport) */}
+      <AnimatePresence>
+        {isNavigating && (
+            <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: "0%" }}
+                exit={{ y: "100%" }}
+                transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+                className="fixed inset-0 z-[9999] bg-[#FFA443]"
             />
-        </div>
+        )}
+      </AnimatePresence>
 
-      <div className="letters flex flex-col justify-between w-full flex-1">
+      {/* 2. THE CARD CONTAINER (Handles Click) */}
+      <div onClick={handleNavigation} className="cursor-pointer group relative z-10">
+        
+        {/* 3. THE BOUNCING CONTENT (Inner Wrapper) */}
+        <div className="
+            BlogCard_small 
+            rounded-[1.5rem] 
+            w-[21.55rem] h-[22.5rem] 
+            flex flex-col px-7 py-2 
+            relative overflow-hidden items-center 
+            bg-white hover:bg-[#FFA443] 
+            transition-colors duration-75 ease-linear
 
-        <div className="heading_and_author pr-0.5 w-full">
-           <div className="blog_heading font-heading font-semibold text-[1.65rem] mt-7 ml-1 truncate text-black">
-               {data?.title || "Untitled"}
-           </div>
+            /* Move Transform here so it doesn't trap the fixed overlay */
+            transform will-change-transform
+            hover:-translate-y-1 
+            transition-transform duration-200 cubic-bezier(0.34, 1.56, 0.64, 1)
+        ">
+            
+            <div className="image_container w-full h-[33.80%] rounded-lg relative overflow-hidden mt-[0.35rem] bg-gray-100">
+               <Image src={getCoverImage()} fill={true} alt="image" className="object-cover transition-transform duration-300 group-hover:scale-105"/>
+            </div>
 
-           <div className="author_name font-body font-medium text-xs text-[#a7a4a4] flex items-center justify-end gap-1">
-              <div className="w-2 h-[2px] bg-[#a7a4a4] truncate"></div> 
-              {data?.author_name || "Unknown"}
-           </div>
-        </div>
+            <div className="letters flex flex-col justify-between w-full flex-1">
+                <div className="heading_and_author pr-0.5 w-full">
+                   <div className="blog_heading font-heading font-semibold text-[1.65rem] mt-7 ml-1 truncate text-black">
+                       {data?.title || "Untitled"}
+                   </div>
+                   <div className="author_name font-body font-medium text-xs text-[#a7a4a4] group-hover:text-black/60 flex items-center justify-end gap-1 transition-colors duration-75">
+                      <div className="w-2 h-[2px] bg-[#a7a4a4] group-hover:bg-black/60 truncate"></div> 
+                      {data?.author_name || "Unknown"}
+                   </div>
+                </div>
 
-        <div className="excr_extras flex flex-col gap-2">
-           <div className="blog_expricit font-body font-normal leading-tight line-clamp-4 text-black">
-             {getExcerpt()}
-           </div>
+                <div className="excr_extras flex flex-col gap-2">
+                   <div className="blog_expricit font-body font-normal leading-tight line-clamp-4 text-black group-hover:text-black/90 transition-colors duration-75">
+                     {getExcerpt()}
+                   </div>
+                   <div className="extras mt-auto w-full flex items-center justify-between pt-4 border-t border-transparent">
+                      <div className="flex gap-4 text-xs font-normal font-body text-[#171717]">
+                          <div className="read_time">5 min</div>
+                          <div className="Date_upload">{formatDate(data?.created_at)}</div>
+                      </div>
+                      <div className="text-xs font-normal font-body text-[hsl(42,59%,30%)] flex items-center gap-1 group-hover:opacity-0 transition-opacity duration-75">
+                          → Read more
+                      </div>
+                   </div>
+                </div>
+            </div>
 
-           <div className="extras mt-auto w-full flex items-center justify-between pt-4 border-t border-transparent">
-
-             <div className="flex gap-4 text-xs font-normal font-body text-[#171717]">
-                 <div className="read_time">5 min</div>
-                 <div className="Date_upload">{formatDate(data?.created_at)}</div>
-             </div>
-               
-             {/* CHANGED: This is now just a DIV, because the parent is the Link */}
-             <div className="Read_more text-xs font-normal font-body text-[hsl(42,59%,30%)] flex items-center gap-1 cursor-pointer hover:underline underline-offset-4">
-                 → Read more
-             </div>
-           </div>
+            {/* BUTTON */}
+            <div className="
+                  absolute -right-2 -bottom-2
+                  w-24 h-24 bg-[#FFA443] border-[8px] border-white rounded-full 
+                  flex items-center justify-center z-20
+                  scale-0 opacity-0 translate-y-6 translate-x-6
+                  group-hover:scale-100 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0
+                  transition-all duration-300 cubic-bezier(0.34, 1.56, 0.64, 1)
+              ">
+                  <motion.svg width="36" height="36" viewBox="-5.76 -5.76 35.52 35.52" fill="none" className="transform -translate-y-1 translate-x-1" initial={{ rotate: 45 }} whileHover={{ rotate: [45, 42, 51, 45] }} transition={{ duration: 0.4, ease: "easeInOut" }}>
+                      <path d="M12 4.5L17 9.5M12 4.5L7 9.5M12 4.5C12 4.5 12 12.8333 12 14.5C12 16.1667 11 19.5 7 19.5" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/> 
+                  </motion.svg>
+            </div>
         </div>
       </div>
-    </Link>
+    </>
   )
 }

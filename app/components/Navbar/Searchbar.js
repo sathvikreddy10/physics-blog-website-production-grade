@@ -61,8 +61,23 @@ export default function SearchBar() {
             )}
 
             {/* MAIN SEARCH CONTAINER */}
-            <div className={`absolute left-1/2 -translate-x-1/2 mt-1 z-20 transition-all duration-300 ease-out
+            <div className={`
+                /* SHARED: Smooth animations, centered X, z-index */
+                transition-all duration-300 ease-out
+                absolute left-1/2 -translate-x-1/2
+
+                /*  DESKTOP (DEFAULT): Sits at the top */
+                 mt-1
                 ${isExpanded ? 'w-96' : 'w-64'} 
+
+                /* 📱 MOBILE OVERRIDE (Only if screen < 768px) */
+                /* This effectively says: "Ignore top-0, use calc instead" */
+                max-md:top-[calc(100vh-4rem)]
+                
+                ${isExpanded 
+                    ? 'max-md:w-[90vw]' 
+                    : 'max-md:w-[70vw]'
+                }
             `}>
                 <div className="h-10 rounded-full bg-[#adcffe] flex justify-between items-center px-2 relative cursor-pointer min-w-0 overflow-hidden">
                     <img src={Search.src} alt="Search" className="w-7 shrink-0"/>

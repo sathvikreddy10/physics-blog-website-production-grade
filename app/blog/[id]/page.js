@@ -6,8 +6,6 @@ import { supabase } from "../../lib/supabase";
 import Navbar from "../../components/Navbar/Navbar"; 
 import Image from "next/image";
 import arrow from "./arrow.svg"; 
-
-// 1. ADD THIS IMPORT
 import BlogSkeleton from "./BlogSkeleton"; 
 
 export default function BlogPost() {
@@ -68,12 +66,8 @@ export default function BlogPost() {
     return textBlock ? textBlock.text.replace(/<[^>]+>/g, '') : "";
   };
 
-
-  // 2. THE FIX: SWAP EMPTY DIV FOR SKELETON
   if (!post) return <BlogSkeleton />;
 
-
-  // 3. YOUR EXACT UI (Untouched)
   return (
     <div className="min-h-screen bg-[#FFA443] font-body pb-20">
       
@@ -81,11 +75,75 @@ export default function BlogPost() {
         .blog-content a { text-decoration: underline; font-weight: 500; }
       `}</style>
 
-      <div className="relative z-10">
+      {/* NAVBAR WRAPPER */}
+      <div className="bg-transparent">
+        <div className="h-[5.2rem] bg-[#FFA443]"></div>
         <Navbar /> 
       </div>
 
-      <div className="pr-[3.65rem] pl-[5rem] pt-[1.85rem] grid gap-10 grid-cols-12 relative items-start">
+      {/* =========================================
+          📱 MOBILE VIEW (Visible < 768px)
+          Matches your Orange Screenshot Design
+      ========================================= */}
+      <div className="md:hidden flex flex-col px-6 pt-4 pb-10">
+          
+          {/* TITLE */}
+          <h1 className="font-heading text-4xl font-bold leading-[1.15] mb-4 text-black">
+              {post.title}
+          </h1>
+
+          {/* AUTHOR (Right Aligned & Underlined) */}
+          <div className="self-end mb-10 flex flex-col items-end">
+              <span className="font-body text-lg border-b border-black/80 pb-0.5 font-medium text-black">
+                 {post.author_name}
+              </span>
+          </div>
+
+          {/* CONTENT LOOP (Stacked: Text -> Image) */}
+          <div className="flex flex-col gap-6">
+              {post.content && post.content.map((block, index) => (
+                  <div key={index} className="flex flex-col gap-4">
+                      {/* Text Block */}
+                      <div 
+                          className="text-lg leading-relaxed font-body text-black/90 blog-content"
+                          dangerouslySetInnerHTML={{ __html: block.text }}
+                      />
+                      
+                      {/* Image Block (Full Width Gray Placeholder style) */}
+                      {block.image && (
+                          <div className="w-full aspect-square relative bg-[#d9d9d9] mt-2 mb-4">
+                              <Image 
+                                  src={block.image} 
+                                  fill={true} 
+                                  alt="blog visual" 
+                                  className="object-cover"
+                              />
+                          </div>
+                      )}
+                  </div>
+              ))}
+          </div>
+
+          {/* AUTHOR IMAGE (Optional - If you want it shown on mobile too) */}
+          {post.author_image && (
+             <div className="mt-12 border-t border-black/10 pt-8 flex items-center gap-4 opacity-80">
+                <div className="w-12 h-12 rounded-full relative overflow-hidden bg-black/5">
+                    <Image src={post.author_image} fill className="object-cover" alt="author"/>
+                </div>
+                <div className="text-sm">
+                    <div className="font-bold">{post.author_name}</div>
+                    <div className="text-xs opacity-70">{post.author_role}</div>
+                </div>
+             </div>
+          )}
+      </div>
+
+
+      {/* =========================================
+          💻 DESKTOP VIEW (Visible >= 768px)
+          Original CSS preserved using 'hidden md:grid'
+      ========================================= */}
+      <div className="hidden md:grid pr-site pl-[5rem] pt-[1.85rem] gap-10 grid-cols-12 relative items-start">
 
         {/* --- LEFT SIDE (CONTENT) --- */}
         <div className="Blog_Details flex flex-col col-span-9 gap-7 pr-8">
@@ -125,8 +183,8 @@ export default function BlogPost() {
       </div>
 
 
-      {/* --- THE FIXED SIDEBAR --- */}
-      <div className="fixed bottom-8 right-[3.65rem] w-[20%] h-[38rem] flex flex-col justify-end gap-4 z-50">
+      {/* --- THE FIXED SIDEBAR (DESKTOP ONLY) --- */}
+      <div className="hidden md:flex fixed bottom-8 right-[3.65rem] w-[20%] h-[38rem] flex-col justify-end gap-4 z-50">
 
             {/* 1. PROGRESS BAR */}
             <div className="progress_indiator px-4 py-3 flex flex-col justify-between bg-[#fecc97] rounded-xl backdrop-blur-sm gap-3 shrink-0">
@@ -195,7 +253,6 @@ export default function BlogPost() {
                  </div>
             </div>
 
-
             {/* 4. AUTHOR */}
             <div 
                 onClick={() => toggleSection('author')}
@@ -208,10 +265,22 @@ export default function BlogPost() {
                      </div>
                  </div>
 
-                 <div className={`text-sm font-body mt-2 overflow-y-auto transition-all duration-500 ${activeSection === 'author' ? 'opacity-100' : 'opacity-0'}`}>
-                     <div className="font-bold">{post.author_name}</div>
-                     <div className="text-xs opacity-70 mb-2">{post.author_role}</div>
-                     <div>{post.author_bio}</div>
+                 <div className={`text-sm font-body mt-2 overflow-y-auto transition-all duration-500 flex flex-col ${activeSection === 'author' ? 'opacity-100' : 'opacity-0'}`}>
+                      
+                      {post.author_image && (
+                        <div className="w-16 h-16 rounded-full overflow-hidden relative mb-3 border-2 border-black/10 shrink-0">
+                            <Image 
+                                src={post.author_image} 
+                                fill={true} 
+                                className="object-cover" 
+                                alt={post.author_name} 
+                            />
+                        </div>
+                      )}
+                      
+                      <div className="font-bold text-lg">{post.author_name}</div>
+                      <div className="text-xs opacity-70 mb-2 font-medium">{post.author_role}</div>
+                      <div className="leading-relaxed opacity-90">{post.author_bio}</div>
                  </div>
             </div>
 

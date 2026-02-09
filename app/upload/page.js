@@ -1,5 +1,7 @@
 "use client";
 
+//ready for mobile 
+
 import React, { useState, useEffect } from "react";
 import { supabase } from '../lib/supabase'; 
 import Navbar from "../components/Navbar/Navbar";
@@ -227,9 +229,10 @@ export default function CreatePost() {
         }
       `}</style>
 
-      <div className="relative z-10">
-        <Navbar /> 
-      </div>
+      <div className="bg-transparent">
+              <div className="h-[5.2rem] bg-[#FFA443]"></div>
+              <Navbar /> 
+        </div>
 
       {/* ========================================= */}
       {/* 📱 MOBILE VIEW: BLOCKED MESSAGE        */}

@@ -7,22 +7,20 @@ export default function CategoryBar({ categories = [] }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const scrollRef = useRef(null) 
-  const [showArrow, setShowArrow] = useState(false) // 👈 State to control arrow visibility
+  const [showArrow, setShowArrow] = useState(false) 
   
   const selectedCategory = searchParams.get('category') || 'All'
 
-  // Check if we need the arrow on mount and resize
   useEffect(() => {
     const checkScroll = () => {
       if (scrollRef.current) {
-        // Show arrow ONLY if content is wider than the container
         const isOverflowing = scrollRef.current.scrollWidth > scrollRef.current.clientWidth
         setShowArrow(isOverflowing)
       }
     }
 
-    checkScroll() // Check initially
-    window.addEventListener('resize', checkScroll) // Check on resize
+    checkScroll() 
+    window.addEventListener('resize', checkScroll) 
     return () => window.removeEventListener('resize', checkScroll)
   }, [categories])
 
@@ -43,8 +41,8 @@ export default function CategoryBar({ categories = [] }) {
   }
 
   return (
-    // Outer Container: Changed 35% -> 20%
-    <div className="relative flex items-center max-w-[20%] gap-2">
+    // 👇 UPDATED: Mobile 35%, Desktop 20%
+    <div className="relative flex items-center max-w-[35%] md:max-w-[20%] gap-2">
       
       {/* Scrollable List */}
       <div 

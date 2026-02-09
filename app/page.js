@@ -1,7 +1,9 @@
 import { supabase } from "./lib/supabase"; 
 import BlogsContent from "./HomeBlogs/BlogsContent";
 import Navbar from "./components/Navbar/Navbar";
-import CategoryBar from "./components/CategoryBar"; // 👈 Import the new component
+import CategoryBar from "./components/CategoryBar"; 
+// 👇 1. IMPORT THE ANIMATION
+import HomeIntro from "./components/HomeIntro"; 
 
 export const revalidate = 0;
 
@@ -20,22 +22,18 @@ export default async function Home({ searchParams }) {
 
   if (error) console.error("Error fetching posts:", error);
 
-  // 3. EXTRACT UNIQUE CATEGORIES (The Backend Wiring)
-  // This automatically finds all categories you've used in your DB
-  // ⚠️ Make sure your DB column is named 'category' or 'tag'
+  // 3. EXTRACT UNIQUE CATEGORIES
   const uniqueCategories = [...new Set(posts?.map(p => p.category).filter(Boolean))];
 
-  // 4. FILTER LOGIC (Search + Category)
+  // 4. FILTER LOGIC
   let filteredPosts = posts || [];
 
-  // Filter by Search Query
   if (searchQuery) {
     filteredPosts = filteredPosts.filter((post) => 
       post.title?.toLowerCase().includes(searchQuery)
     );
   }
 
-  // Filter by Category
   if (selectedCategory !== "All") {
     filteredPosts = filteredPosts.filter((post) => 
       post.category === selectedCategory
@@ -44,10 +42,15 @@ export default async function Home({ searchParams }) {
 
   return (
     <>
-      <Navbar/>
+      {/* 👇 2. PLUG IT IN HERE (It sits on top of everything) */}
+      <HomeIntro />
 
+      <Navbar/>
+      
+      <div className="h-[5.2rem] bg-transparent"></div>
+      
       {/* WIRED CATEGORY BAR */}
-      <div className="category m-0 px-[3.65rem]">
+      <div className="category m-0 px-site">
          <CategoryBar categories={uniqueCategories} />
       </div>
 
