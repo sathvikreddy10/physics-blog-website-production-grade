@@ -33,7 +33,6 @@ export default function BlogCard_2_large({ data }) {
 
   return (
     <>
-      {/* 1. ORANGE CURTAIN POP */}
       <AnimatePresence>
         {isNavigating && (
             <motion.div initial={{ y: "100%" }} animate={{ y: "0%" }} exit={{ y: "100%" }} transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-[99999] bg-[#FFA443]" />
@@ -48,7 +47,6 @@ export default function BlogCard_2_large({ data }) {
             flex px-7 py-2 
             relative overflow-hidden items-center gap-8 shrink-0 
             
-            /* 👇 BORDERS RESTORED */
             border border-[#c3c3c3bc] 
             hover:border-[#FFA443]
 

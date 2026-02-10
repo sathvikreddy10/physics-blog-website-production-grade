@@ -72,7 +72,7 @@ export default function SearchBar() {
 
                 /* 📱 MOBILE OVERRIDE (Only if screen < 768px) */
                 /* This effectively says: "Ignore top-0, use calc instead" */
-                max-md:top-[calc(100vh-6rem)]
+                max-md:top-[calc(100vh-10rem)]
                 
                 ${isExpanded 
                     ? 'max-md:w-[90vw]' 
