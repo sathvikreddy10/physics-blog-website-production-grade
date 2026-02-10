@@ -22,8 +22,8 @@ export default function Contact() {
   };
 
   return (
-    // 👇 RESET: Using 'block' and 'h-auto' with 'touch-auto' for mobile gestures
-    <div className="block w-full min-h-screen h-auto bg-[#FFA443] font-body touch-auto">
+    // 👇 FIXED: Changed to fixed height (100dvh) + overflow-y-auto to guarantee mobile scroll
+    <div className="block w-full h-[100dvh] overflow-y-auto bg-[#FFA443] font-body">
       
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 pt-8 md:pt-16 pb-24">
         
