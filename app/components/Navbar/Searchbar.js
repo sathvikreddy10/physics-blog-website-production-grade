@@ -3,7 +3,7 @@
 import Filter from './Filter.svg'
 import Search from './search-icon.svg'
 import CloseIcon from './X.svg'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation' // 👈 IMPORTANT IMPORTS
+import { usePathname, useRouter, useSearchParams } from 'next/navigation' 
 import React, { useState, useEffect } from 'react' 
 import FilterMenu from './FilterMenu.js'
 
@@ -15,6 +15,7 @@ export default function SearchBar() {
     // States
     const [isExpanded, setIsExpanded] = useState(false)
     const [showFilter, setShowFilter] = useState(false)
+    const [isFocused, setIsFocused] = useState(false) // 👈 1. Added State
     
     // Initialize query from URL so it doesn't disappear on refresh
     const [query, setQuery] = useState(searchParams.get('q')?.toString() || "")
@@ -44,6 +45,7 @@ export default function SearchBar() {
     const handleClose = () => {
         setIsExpanded(false)
         setShowFilter(false)
+        setIsFocused(false) // Reset focus state just in case
     }
 
     // 4. Toggle Filter Logic
@@ -66,13 +68,13 @@ export default function SearchBar() {
                 transition-all duration-300 ease-out
                 absolute left-1/2 -translate-x-1/2
 
-                /*  DESKTOP (DEFAULT): Sits at the top */
+                /* DESKTOP (DEFAULT): Sits at the top */
                  mt-1
                 ${isExpanded ? 'w-96' : 'w-64'} 
 
-                /* 📱 MOBILE OVERRIDE (Only if screen < 768px) */
-                /* This effectively says: "Ignore top-0, use calc instead" */
-                max-md:top-[calc(100vh-10rem)]
+                /* 📱 MOBILE OVERRIDE */
+                /* If focused, move to 40vh (avoid keyboard). If not, stay at bottom. */
+                ${isFocused ? 'max-md:top-[40vh]' : 'max-md:top-[calc(100vh-10rem)]'}
                 
                 ${isExpanded 
                     ? 'max-md:w-[90vw]' 
@@ -96,6 +98,9 @@ export default function SearchBar() {
                                 autoFocus 
                                 value={query}
                                 onChange={handleSearch}
+                                /* 👇 2. Trigger the move up on mobile focus */
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
                                 className="bg-transparent border-none outline-none text-sm w-full placeholder-gray-600 font-body min-w-0" 
                                 placeholder="Search anything..." 
                             />
