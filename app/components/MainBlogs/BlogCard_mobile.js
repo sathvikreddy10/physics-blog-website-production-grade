@@ -21,7 +21,7 @@ export default function BlogCard_mobile({ post, orientation = "right" }) {
     <>
       <AnimatePresence>
         {isNavigating && (
-            <motion.div initial={{ y: "100%" }} animate={{ y: "0%" }} exit={{ y: "100%" }} transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-[9999] bg-[#FFA443]" />
+            <motion.div initial={{ y: "100%" }} animate={{ y: "0%" }} exit={{ y: "100%" }} transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-[9999] bg-main" />
         )}
       </AnimatePresence>
 
@@ -52,7 +52,7 @@ export default function BlogCard_mobile({ post, orientation = "right" }) {
                     <span>{post.read_time || "5 min"}</span>
                     <span>{post.created_at ? new Date(post.created_at).toLocaleDateString() : "Jan 12/26"}</span>
                 </div>
-                <div className="flex items-center gap-1 text-[#FFA443]">
+                <div className="flex items-center gap-1 text-readmore">
                     <span>→</span>
                     <span className="underline decoration-[#FFA443]/30 underline-offset-2">Read</span>
                 </div>
@@ -63,7 +63,7 @@ export default function BlogCard_mobile({ post, orientation = "right" }) {
             {visual ? (
                 <Image src={visual} alt={post.title} fill sizes="(max-width: 768px) 40vw, 33vw" className="object-cover" />
             ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs text-center p-2 font-medium bg-gray-100">CUDA</div>
+                <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs text-center p-2 font-medium bg-gray-100">SB</div>
             )}
         </div>
       </div>

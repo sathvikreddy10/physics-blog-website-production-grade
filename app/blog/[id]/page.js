@@ -69,7 +69,7 @@ export default function BlogPost() {
   if (!post) return <BlogSkeleton />;
 
   return (
-    <div className="min-h-screen bg-[#FFA443] font-body pb-20">
+    <div className="min-h-screen bg-main font-body pb-20">
       
       <style jsx global>{`
         .blog-content a { text-decoration: underline; font-weight: 500; }
@@ -77,7 +77,7 @@ export default function BlogPost() {
 
       {/* NAVBAR WRAPPER */}
       <div className="bg-transparent">
-        <div className="h-[5.2rem] bg-[#FFA443]"></div>
+        <div className="h-[5.2rem] bg-main"></div>
         <Navbar /> 
       </div>
 
@@ -151,7 +151,7 @@ export default function BlogPost() {
                 <div className="Heading font-heading font-semibold text-[4.75rem] text-black leading-[5rem] mt-4">
                     {post.title}
                 </div>
-                <div className="author self-end flex items-center gap-2 text-[1.15rem] font-body font-medium text-[#611111] pr-2 pt-1">
+                <div className="author self-end flex items-center gap-2 text-[1.15rem] font-body font-medium text-author-fullblog pr-2 pt-1">
                     <span className="text-6xl items-centre justify-center">~</span> {post.author_name}
                 </div>
             </div>
@@ -187,7 +187,7 @@ export default function BlogPost() {
       <div className="hidden md:flex fixed bottom-8 right-[3.65rem] w-[20%] h-[38rem] flex-col justify-end gap-4 z-50">
 
             {/* 1. PROGRESS BAR */}
-            <div className="progress_indiator px-4 py-3 flex flex-col justify-between bg-[#fecc97] rounded-xl backdrop-blur-sm gap-3 shrink-0">
+            <div className="progress_indiator px-4 py-3 flex flex-col justify-between bg-progress-indicatortab rounded-xl backdrop-blur-sm gap-3 shrink-0">
                 <div className="progess_percentage_comment flex justify-between items-end">
                     <div className="progress_comment text-sm font-body font-medium text-[#4b2b07]">
                         {scrollProgress < 100 ? "Keep reading!" : "Done!"}
@@ -196,9 +196,9 @@ export default function BlogPost() {
                         {scrollProgress}%
                     </div>
                 </div>
-                <div className="progrss_bar h-[0.35rem] w-full bg-[#FFA443]">
+                <div className="progrss_bar h-[0.35rem] w-full bg-main">
                     <div 
-                        className="h-full bg-[#4b2b07] transition-all duration-300" 
+                        className="h-full bg-progress-line transition-all duration-300" 
                         style={{ width: `${scrollProgress}%` }}
                     ></div>
                 </div>
@@ -206,7 +206,7 @@ export default function BlogPost() {
                 
 
             {/* 2. BLOG LIST */}
-            <div className={`other_blogs_recomendation p-4 bg-[#D9D9D9] rounded-xl flex flex-col justify-between transition-all duration-500 ease-in-out overflow-hidden ${activeSection === 'blogs' ? 'flex-1 overflow-y-auto' : 'h-[8rem]'}`}>
+            <div className={`other_blogs_recomendation p-4 bg-sidebar rounded-xl flex flex-col justify-between transition-all duration-500 ease-in-out overflow-hidden ${activeSection === 'blogs' ? 'flex-1 overflow-y-auto' : 'h-[8rem]'}`}>
                 
                 {otherBlogs.length > 0 ? (
                     otherBlogs.map((blog, index) => (
@@ -232,7 +232,7 @@ export default function BlogPost() {
             {/* 3. PAPERS USED */}
             <div 
                 onClick={() => toggleSection('papers')}
-                className={`bottom_bars papers_used p-4 bg-[#D9D9D9] rounded-xl cursor-pointer overflow-hidden transition-all duration-500 ease-in-out flex flex-col ${activeSection === 'papers' ? 'flex-1' : 'h-[4.5rem] shrink-0'}`}
+                className={`bottom_bars papers_used p-4 bg-sidebar rounded-xl cursor-pointer overflow-hidden transition-all duration-500 ease-in-out flex flex-col ${activeSection === 'papers' ? 'flex-1' : 'h-[4.5rem] shrink-0'}`}
             >
                  <div className="flex justify-between items-center mb-2 shrink-0">
                      <div className="Papers_used font-semibold font-heading text-[18px]"> Papers used</div>
@@ -256,7 +256,7 @@ export default function BlogPost() {
             {/* 4. AUTHOR */}
             <div 
                 onClick={() => toggleSection('author')}
-                className={`bottom_bars Author p-4 bg-[#D9D9D9] rounded-xl cursor-pointer overflow-hidden transition-all duration-500 ease-in-out flex flex-col ${activeSection === 'author' ? 'flex-1' : 'h-[4.5rem] shrink-0'}`}
+                className={`bottom_bars Author p-4 bg-sidebar rounded-xl cursor-pointer overflow-hidden transition-all duration-500 ease-in-out flex flex-col ${activeSection === 'author' ? 'flex-1' : 'h-[4.5rem] shrink-0'}`}
             >
                  <div className="flex justify-between items-center mb-2 shrink-0">
                      <div className="Papers_used font-semibold font-heading text-[18px]"> Author</div>

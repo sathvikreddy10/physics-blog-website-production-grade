@@ -211,7 +211,7 @@ export default function CreatePost() {
 
 
   return (
-    <div className="min-h-screen bg-[#FFA443] font-body pb-32"> 
+    <div className="min-h-screen bg-main font-body pb-32"> 
       
       <style jsx global>{`
         [contenteditable]:empty:before {
@@ -230,7 +230,7 @@ export default function CreatePost() {
       `}</style>
 
       <div className="bg-transparent">
-              <div className="h-[5.2rem] bg-[#FFA443]"></div>
+              <div className="h-[5.2rem] bg-main"></div>
               <Navbar /> 
         </div>
 
@@ -331,13 +331,13 @@ export default function CreatePost() {
                     
                     <button 
                         onClick={handlePublish}
-                        className="bg-black text-[#FFA443] font-heading font-bold text-xl py-4 px-6 rounded-xl hover:scale-105 transition-transform shadow-xl"
+                        className="bg-black text-main font-heading font-bold text-xl py-4 px-6 rounded-xl hover:scale-105 transition-transform shadow-xl"
                     >
                         PUBLISH 🚀
                     </button>
 
                     {/* CUSTOM CATEGORY TAG */}
-                    <div className="p-4 bg-[#D9D9D9] rounded-xl flex flex-col gap-2">
+                    <div className="p-4 bg-sidebar rounded-xl flex flex-col gap-2">
                         <label className="font-heading font-semibold text-sm opacity-50 tracking-wider">CATEGORY TAG</label>
                         <input 
                             type="text"
@@ -349,7 +349,7 @@ export default function CreatePost() {
                     </div>
 
                     {/* AUTHOR SECTION */}
-                    <div className="p-4 bg-[#D9D9D9] rounded-xl flex flex-col gap-4">
+                    <div className="p-4 bg-sidebar rounded-xl flex flex-col gap-4">
                         <label className="font-heading font-semibold text-sm opacity-50 tracking-wider">ABOUT AUTHOR</label>
                         <div className="flex items-center gap-4">
                             <div className="w-16 h-16 rounded-full bg-white/50 shrink-0 overflow-hidden relative cursor-pointer group hover:ring-2 ring-black/20 transition-all">
@@ -392,7 +392,7 @@ export default function CreatePost() {
                     </div>
 
                     {/* PAPERS USED */}
-                    <div className="p-4 bg-[#D9D9D9] rounded-xl flex flex-col gap-3">
+                    <div className="p-4 bg-sidebar rounded-xl flex flex-col gap-3">
                         <label className="font-heading font-semibold text-sm opacity-50">PAPERS USED</label>
                         <div className="flex flex-col gap-2">
                             <textarea 

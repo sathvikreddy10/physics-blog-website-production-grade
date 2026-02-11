@@ -35,7 +35,7 @@ export default function BlogCard_2_large({ data }) {
     <>
       <AnimatePresence>
         {isNavigating && (
-            <motion.div initial={{ y: "100%" }} animate={{ y: "0%" }} exit={{ y: "100%" }} transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-[99999] bg-[#FFA443]" />
+            <motion.div initial={{ y: "100%" }} animate={{ y: "0%" }} exit={{ y: "100%" }} transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-[99999] bg-main" />
         )}
       </AnimatePresence>
 
@@ -48,9 +48,9 @@ export default function BlogCard_2_large({ data }) {
             relative overflow-hidden items-center gap-8 shrink-0 
             
             border border-[#c3c3c3bc] 
-            hover:border-[#FFA443]
+            hover:border-main-h
 
-            bg-white hover:bg-[#FFA443]
+            bg-white hover:bg-main-h
             transition-colors duration-75 ease-linear
             
             transform will-change-transform
@@ -62,7 +62,7 @@ export default function BlogCard_2_large({ data }) {
                 <div className="blog_heading font-heading font-semibold text-[1.65rem] truncate text-black">
                     {data?.title || "Untitled"}
                 </div>
-                <div className="author_name font-body font-medium text-xs text-[#a7a4a4] group-hover:text-black/60 flex items-center justify-end gap-1 transition-colors duration-75">
+                <div className="author_name font-body font-medium text-xs text--authorname-blog group-hover:text-black/60 flex items-center justify-end gap-1 transition-colors duration-75">
                     <div className="w-2 h-[2px] bg-[#c9c6c6] group-hover:bg-black/60 truncate"></div> 
                      {data?.author_name || "Unknown"}
                 </div>
@@ -76,7 +76,7 @@ export default function BlogCard_2_large({ data }) {
                       <div className="read_time">5 min</div>
                       <div className="Date_upload">{formatDate(data?.created_at)}</div>
                     </div>
-                    <div className="Read_more text-xs font-normal font-body text-[hsl(42,59%,30%)] flex items-center gap-1 group-hover:opacity-0 transition-opacity duration-75">
+                    <div className="Read_more text-xs font-normal font-body text-readmore flex items-center gap-1 group-hover:opacity-0 transition-opacity duration-75">
                       → Read more
                     </div>
                 </div>
@@ -92,7 +92,7 @@ export default function BlogCard_2_large({ data }) {
             {/* BUTTON */}
             <div className="
                   absolute -right-2 -bottom-2
-                  w-24 h-24 bg-[#FFA443] border-[8px] border-white rounded-full 
+                  w-24 h-24 bg-main border-[8px] border-white rounded-full 
                   flex items-center justify-center z-20
                   scale-0 opacity-0 translate-y-6 translate-x-6
                   group-hover:scale-100 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0

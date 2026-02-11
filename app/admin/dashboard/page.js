@@ -62,7 +62,7 @@ export default function Dashboard() {
   if (!isAuthenticated) {
     return (
         // 👇 FIXED: Use h-[100dvh] + overflow-y-auto. min-h-150vh breaks scroll if parent is locked.
-        <div className="w-full h-[100dvh] overflow-y-auto bg-[#FFA443] flex flex-col items-center justify-center py-20 px-4">
+        <div className="w-full h-[100dvh] overflow-y-auto bg-main flex flex-col items-center justify-center py-20 px-4">
             <form 
                 onSubmit={handleLogin} 
                 className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-sm flex flex-col gap-6 transform hover:scale-[1.02] transition-transform duration-300"
@@ -94,7 +94,7 @@ export default function Dashboard() {
   // ✅ RENDER: DASHBOARD
   return (
     // 👇 FIXED: h-[100dvh] + overflow-y-auto guarantees internal scrolling
-    <div className="w-full h-[100dvh] overflow-y-auto bg-[#FFA443] font-body pb-20">
+    <div className="w-full h-[100dvh] overflow-y-auto bg-main-h font-body pb-20">
       
       <div className="max-w-6xl mx-auto px-4 md:px-6 pt-6 md:pt-12">
         

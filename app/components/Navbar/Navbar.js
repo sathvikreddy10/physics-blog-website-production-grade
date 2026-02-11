@@ -65,24 +65,24 @@ export default function Navbar() {
       </div>
 
       {/* SEARCH BAR */}
-      <Suspense fallback={<div className="w-64 h-10 bg-gray-200 rounded-full" />}>
+      <Suspense fallback={<div className="w-64 h-10 bg-searchbar-loading rounded-full" />}>
           <SearchBar/>
       </Suspense>
 
       {/* --- DESKTOP LINKS (Rectangle Buttons) --- */}
       <div className="hidden md:flex items-center gap-4 font-body">
         <BookmarkBtn />
-        <Link href="/contact" className="px-4 py-1.5 rounded-lg transition-all duration-200 hover:bg-[#FFA443] hover:text-black"> 
+        <Link href="/contact" className="px-4 py-1.5 rounded-lg transition-all duration-200 hover:bg-hover-on-links hover:text-black"> 
             Contact 
         </Link>
-        <Link href="/admin/dashboard" className="px-4 py-1.5 rounded-lg transition-all duration-200 hover:bg-[#FFA443] hover:text-black"> 
+        <Link href="/admin/dashboard" className="px-4 py-1.5 rounded-lg transition-all duration-200 hover:bg-hover-on-links hover:text-black"> 
             Dashboard
         </Link>
       </div>
 
       {/* --- MOBILE HAMBURGER --- */}
       <button 
-        className="md:hidden relative z-[60] p-2 text-black hover:bg-[#FFA443] rounded-md transition-colors"
+        className="md:hidden relative z-[60] p-2 text-black hover:bg-hover-on-links rounded-md transition-colors"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         {isMenuOpen ? (
@@ -105,7 +105,7 @@ export default function Navbar() {
 
     {/* --- MOBILE MENU OVERLAY --- */}
     <div className={`
-        fixed inset-0 bg-[#fff8f0] z-50 flex flex-col items-center justify-center gap-10
+        fixed inset-0 bg-hamburger-behind z-50 flex flex-col items-center justify-center gap-10
         transition-all duration-300 ease-in-out
         ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}
         md:hidden
@@ -116,14 +116,14 @@ export default function Navbar() {
         </div>
 
         {/* HOME LINK acting as Close/Reset */}
-        <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-3xl font-heading font-normal text-black hover:bg-[#FFA443] px-6 py-2 rounded-xl transition-colors">
+        <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-3xl font-heading font-normal text-black hover:bg-hover-on-links px-6 py-2 rounded-xl transition-colors">
             Home
         </Link>
 
-        <Link href="/contact" className="text-3xl font-heading font-normal text-black hover:bg-[#FFA443] px-6 py-2 rounded-xl transition-colors">
+        <Link href="/contact" className="text-3xl font-heading font-normal text-black hover:bg-hover-on-links px-6 py-2 rounded-xl transition-colors">
             Contact
         </Link>
-        <Link href="/admin/dashboard" className="text-3xl font-heading font-normal text-black hover:bg-[#FFA443] px-6 py-2 rounded-xl transition-colors">
+        <Link href="/admin/dashboard" className="text-3xl font-heading font-normal text-black hover:bg-hover-on-links px-6 py-2 rounded-xl transition-colors">
             Dashboard
         </Link>
 

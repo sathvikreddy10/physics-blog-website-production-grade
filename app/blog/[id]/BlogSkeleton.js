@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-[#FFA443] font-body pb-20">
+    <div className="min-h-screen bg-main font-body pb-20">
       
       {/* 1. Navbar */}
       <div className="relative z-10">

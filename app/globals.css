@@ -1,12 +1,51 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --recomedations:#f0efef;
+  --background: hsl(0, 0%, 100%);
   --padding-site: clamp(1rem, 5vw, 3.65rem);
+  --links-hover:hsl(91, 51%, 64%);
+  --main-hex:hsl(106, 36%, 81%);
+  --main-h-hex:hsl(106, 41%, 64%);
+  --author-full-blog:#611111;
+  --mobile-hamburger-background:#fff8f0;
+  --searchbar-blue:hsl(91, 57%, 62%);
+  --authorname:#a7a4a4;
+  --readmore-link:#7a5f1f;
+  --progressbar:#4b2b07;
+  --progresindicator:#a6c365;
+  --progressline:hsl(91, 100%, 15%);
+/*   --recomedations:#d6d8d0;
+  --background: #ffffff;
+  --padding-site: clamp(1rem, 5vw, 3.65rem);
+  --links-hover:hsl(91, 52%, 52%);
+  --main-hex:#30580a;
+  --main-h-hex:hsl(91, 42%, 56%);
+  --author-full-blog:#611111;
+  --mobile-hamburger-background:#fff8f0;
+  --searchbar-blue:hsl(91, 57%, 62%);
+  --authorname:#a7a4a4;
+  --readmore-link:#7a5f1f;
+  --progressbar:#4b2b07;
+  --progresindicator:#bcd583;
+  --progressline:hsl(91, 100%, 15%); */
 }
 
 @theme inline {
+  --color-progress-line:var(--progressline);
+  --color-progress-indicatortab:var(--progresindicator);
+  --color-sidebar:var(--recomedations);
+  --color-progress-bar:var(--progressbar);
+  --color-author-fullblog:var(--author-full-blog);
+  --color-readmore:var(--readmore-link);
+  --color-authorname-blog:var(--authorname);
+  --color-main:var(--main-hex);
+  --color-main-h:var(--main-h-hex);
+  --color-hamburger-behind:var(--mobile-hamburger-background);
+  --color-hover-on-links:var(--links-hover);
+  --color-searchbar:var(--searchbar-blue);
+  --color-searchbar-loading: theme('colors.gray.200');
+  --color-searchbar-placeholder: theme('colors.gray.600');
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-heading: var(--font-josefin);
@@ -14,6 +53,8 @@
   --spacing-site: var(--padding-site);
  
 }
+
+
 
 body {
   background: var(--background);

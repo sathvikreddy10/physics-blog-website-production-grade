@@ -23,7 +23,7 @@ export default function Contact() {
 
   return (
     // 👇 FIXED: Changed to fixed height (100dvh) + overflow-y-auto to guarantee mobile scroll
-    <div className="block w-full h-[100dvh] overflow-y-auto bg-[#FFA443] font-body">
+    <div className="block w-full h-[100dvh] overflow-y-auto bg-main font-body">
       
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 pt-8 md:pt-16 pb-24">
         
@@ -38,7 +38,7 @@ export default function Contact() {
                     <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" className="w-full bg-transparent border-b border-white/20 py-2 text-base text-white outline-none focus:border-[#FFA443]" required />
                     <input type="text" name="subject" value={formData.subject} onChange={handleChange} placeholder="Subject" className="w-full bg-transparent border-b border-white/20 py-2 text-base text-white outline-none focus:border-[#FFA443]" required />
                     <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Hello..." className="w-full bg-transparent border-b border-white/20 py-2 text-base h-24 text-white outline-none focus:border-[#FFA443] resize-none" required />
-                    <button type="submit" className="mt-4 bg-[#FFA443] text-black font-heading font-bold text-base py-3 rounded-lg shadow-lg">SEND MESSAGE</button>
+                    <button type="submit" className="mt-4 bg-main-h text-black font-heading font-bold text-base py-3 rounded-lg shadow-lg">SEND MESSAGE</button>
                 </form>
             </div>
             <div className="flex flex-col gap-6 px-2">
@@ -67,7 +67,7 @@ export default function Contact() {
                     <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" className="bg-transparent border-b border-white/20 py-3 text-lg text-white outline-none focus:border-[#FFA443]" required />
                     <input type="text" name="subject" value={formData.subject} onChange={handleChange} placeholder="Subject" className="bg-transparent border-b border-white/20 py-3 text-lg text-white outline-none focus:border-[#FFA443]" required />
                     <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Message..." className="bg-transparent border-b border-white/20 py-3 text-lg h-32 text-white outline-none focus:border-[#FFA443] resize-none" required />
-                    <button type="submit" className="mt-6 bg-[#FFA443] text-black font-heading font-bold text-lg py-4 px-8 rounded-xl hover:bg-white transition-all">SEND EMAIL →</button>
+                    <button type="submit" className="mt-6 bg-main-h text-black font-heading font-bold text-lg py-4 px-8 rounded-xl hover:bg-white transition-all">SEND EMAIL →</button>
                 </form>
             </div>
         </div>

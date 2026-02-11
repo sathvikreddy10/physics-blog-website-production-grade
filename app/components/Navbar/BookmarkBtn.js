@@ -87,16 +87,16 @@ export default function BookmarkBtn() {
             e.stopPropagation(); 
             setIsOpen(!isOpen);
         }} 
-        className="group bg-transparent border-none p-0 cursor-pointer outline-none flex items-center gap-2 py-1 px-2 rounded-lg hover:bg-black/5 transition-colors"
+        className="group bg-transparent border-none p-0 cursor-pointer outline-none flex items-center gap-2 py-1 px-2 rounded-lg hover:bg-hover-on-links transition-colors"
       >
         <div className="relative">
             <img src={BookmarkIcon.src} alt="Bookmark" className="w-4 h-4 opacity-80 group-hover:opacity-100" />
             {/* Tiny Notification Dot */}
             {bookmarks.length > 0 && (
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#FFA443] rounded-full border border-white"></span>
+                <span className="absolute -top-1 -right-1 w-2 h-2 bg-hover-on-links rounded-full border border-white"></span>
             )}
         </div>
-        <span className="text-sm font-medium text-black/80 group-hover:text-black transition-colors">
+        <span className="text-sm font-medium text-black/95 group-hover:text-black transition-colors">
             Bookmarks
         </span>
       </button>

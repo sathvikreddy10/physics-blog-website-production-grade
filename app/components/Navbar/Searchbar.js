@@ -81,7 +81,7 @@ export default function SearchBar() {
                     : 'max-md:w-[70vw]'
                 }
             `}>
-                <div className="h-10 rounded-full bg-[#adcffe] flex justify-between items-center px-2 relative cursor-pointer min-w-0 overflow-hidden">
+                <div className="h-10 rounded-full bg-searchbar flex justify-between items-center px-2 relative cursor-pointer min-w-0 overflow-hidden">
                     <img src={Search.src} alt="Search" className="w-7 shrink-0"/>
                     <div className="flex-1 flex items-center ml-2 min-w-0">
                         {!isExpanded ? (
@@ -107,13 +107,11 @@ export default function SearchBar() {
                         )}
                     </div>
                     <button 
-                        onClick={toggleFilter}
-                        className="p-1 hover:bg-white/20 rounded-full transition-colors w-10 flex justify-center items-center shrink-0"
+                        
+                        className="p-1 rounded-full transition-colors w-10 flex justify-center items-center shrink-0"
                     >
-                        {showFilter ? <img src={CloseIcon.src} alt="Close" className="w-8 h-8"/> : <img src={Filter.src} alt="Filter" className="w-10"/>}
                     </button>
                 </div>
-                {showFilter && <FilterMenu />}
             </div>
         </>
     )

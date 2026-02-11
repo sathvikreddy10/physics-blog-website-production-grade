@@ -21,7 +21,7 @@ export default function HomeIntro() {
     <AnimatePresence mode="wait">
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#FFA443]"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-main"
           
           // 👇 FIX: Start fully visible (opacity 1) so it covers the page instantly
           initial={{ opacity: 1 }} 
