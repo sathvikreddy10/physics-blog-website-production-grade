@@ -2,7 +2,7 @@
 //HELLO
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Logo from './CUDA.jpeg'
+import Logo from './CUDA.svg'
 import SearchBar from './Searchbar.js' 
 import BookmarkBtn from "./BookmarkBtn";
 import { useRef, useEffect, useState, Suspense } from "react"; 

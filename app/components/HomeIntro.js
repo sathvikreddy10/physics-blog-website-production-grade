@@ -2,14 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image"; // If you went back to PNG
-// import { logoPaths } from "./LogoData"; // Uncomment if you are using the SVG version
+import Image from "next/image";
+// 👇 IMPORT: This is the cache-buster. 
+// It ensures the browser sees the new .jpeg and doesn't look at the old deleted .png
+import SBLogo from "./sb-logo.jpeg"; 
 
 export default function HomeIntro() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Wait for animation (2.2s) then exit
     const timer = setTimeout(() => {
       setIsVisible(false);
     }, 2200);
@@ -22,37 +23,26 @@ export default function HomeIntro() {
       {isVisible && (
         <motion.div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-main"
-          
-          // 👇 FIX: Start fully visible (opacity 1) so it covers the page instantly
           initial={{ opacity: 1 }} 
           animate={{ opacity: 1 }}
-          
-          // Only animate the EXIT (slide up)
-          exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
+          exit={{ y: "-100%", transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } }}
         >
           
-          {/* THE LOGO ANIMATION (The "Slam") */}
           <motion.div
-            // Start: Big, Invisible, Blurred
-            initial={{ scale: 10, opacity: 0, filter: "blur(10px)" }}
-            
-            // End: Normal size, Visible, Sharp
+            initial={{ scale: 10, opacity: 0, filter: "blur(5px)" }}
             animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-            
-            // Physics
             transition={{ 
-                duration: 0.8, 
+                duration: 0.6, 
                 ease: "circOut", 
                 type: "spring",
                 stiffness: 150, 
                 damping: 20
             }}
-            
             className="relative w-[80vw] h-[50vh] md:w-[60vw] md:h-[60vh]"
           >
-             {/* If using the PNG: */}
+            {/* 👇 UPDATED: Using the imported SBLogo object */}
             <Image 
-                src="/sb-logo.png" 
+                src={SBLogo} 
                 alt="SB Logo"
                 fill
                 className="object-contain"
