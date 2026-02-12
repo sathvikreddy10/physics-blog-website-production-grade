@@ -1,5 +1,7 @@
 "use client";
 
+// 1. Import your variable (Make sure data.js is in the same folder as this file)
+import { CONTACT_EMAIL } from "./data.js"; 
 import React, { useState } from "react";
 
 export default function Contact() {
@@ -16,15 +18,16 @@ export default function Contact() {
   const handleSend = (e) => {
     e.preventDefault();
     const { name, subject, message } = formData;
-    const emailTo = "sathvikreddyfootballer@gmail.com";
+    
+    // 2. Wiring in the variable here
+    const emailTo = CONTACT_EMAIL; 
+    
     const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject || "New Inquiry")}&body=${encodeURIComponent(`Name: ${name}\n\n${message}`)}`;
     window.location.href = mailtoLink;
   };
 
   return (
-    // 👇 FIXED: Changed to fixed height (100dvh) + overflow-y-auto to guarantee mobile scroll
     <div className="block w-full h-[100dvh] overflow-y-auto bg-main font-body">
-      
       <div className="max-w-7xl mx-auto w-full px-6 md:px-12 pt-8 md:pt-16 pb-24">
         
         {/* MOBILE LAYOUT */}
@@ -42,7 +45,8 @@ export default function Contact() {
                 </form>
             </div>
             <div className="flex flex-col gap-6 px-2">
-                <a href="mailto:sathvikreddyfootballer@gmail.com" className="text-xl font-heading font-bold break-all">sathvikreddyfootballer@gmail.com</a>
+                {/* 3. Using variable for the display text and link */}
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-xl font-heading font-bold break-all">{CONTACT_EMAIL}</a>
                 <div className="flex gap-3 flex-wrap">
                     <SocialLink label="Twitter" />
                     <SocialLink label="LinkedIn" />
@@ -57,7 +61,8 @@ export default function Contact() {
                 <h1 className="font-heading font-bold text-7xl text-black leading-none mb-6">Let's start a <br/> conversation.</h1>
                 <p className="text-xl text-black/80 font-medium max-w-md leading-relaxed">Interested in collaboration? Have a critique on my code? Or just want to say hi? I’m all ears.</p>
                 <div className="flex flex-col gap-8 mt-4">
-                    <a href="mailto:sathvikreddyfootballer@gmail.com" className="text-3xl font-heading font-bold border-b-2 border-black/0 hover:border-black/100 transition-all">sathvikreddyfootballer@gmail.com</a>
+                    {/* 4. Using variable for desktop email link */}
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-3xl font-heading font-bold border-b-2 border-black/0 hover:border-black/100 transition-all">{CONTACT_EMAIL}</a>
                     <div className="text-3xl font-heading font-bold">Hyderabad, India</div>
                 </div>
             </div>
@@ -75,8 +80,9 @@ export default function Contact() {
 
       <footer className="w-full py-8 px-6 mt-auto border-t border-black/5 flex flex-col items-center justify-center gap-1 opacity-40 hover:opacity-100 transition-opacity">
           <p className="text-[10px] font-body font-bold uppercase tracking-[0.2em] text-black">Made by Sathvik</p>
-          <a href="mailto:sathvikreddyfootballer@gmail.com" className="text-[9px] font-body text-black hover:underline">
-              website built by sathvikreddyfootballer@gmail.com
+          {/* 5. Using variable in footer */}
+          <a href="mailto : sathvikreddyfootballer@gmail.com" className="text-[9px] font-body text-black hover:underline">
+              website built by sathvikreddyfootballer
           </a>
       </footer>
     </div>
