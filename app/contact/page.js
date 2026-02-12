@@ -59,11 +59,12 @@ export default function Contact() {
         <div className="hidden md:grid grid-cols-2 gap-24 items-start">
             <div className="flex flex-col gap-10">
                 <h1 className="font-heading font-bold text-7xl text-black leading-none mb-6">Let's start a <br/> conversation.</h1>
-                <p className="text-xl text-black/80 font-medium max-w-md leading-relaxed">Interested in collaboration? Have a critique on my blog?</p>
-                <div className="flex flex-col gap-8 mt-4">
+                <p className="text-xl text-black/80 font-medium max-w-md leading-relaxed">Interested in collaboration? Have a critique on my blog? I am all ears.</p>
+                <div className="flex flex-col gap-2 mt-4">
+                    Email me at:
                     {/* 4. Using variable for desktop email link */}
                     <a href={`mailto:${CONTACT_EMAIL}`} className="text-3xl font-heading font-bold border-b-2 border-black/0 hover:border-black/100 transition-all">{CONTACT_EMAIL}</a>
-                    <div className="text-3xl font-heading font-bold">Guwahati, India</div>
+                    
                 </div>
             </div>
             <div className="bg-[#121212] text-white p-12 rounded-3xl shadow-2xl relative overflow-hidden">
