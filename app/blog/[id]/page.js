@@ -190,7 +190,7 @@ export default function BlogPost() {
                             </div>
                         ))
                      ) : (
-                        <div className="opacity-50 italic">No papers cited for this post.</div>
+                        <div className="opacity-50 italic">No papers cited for this post</div>
                      )}
                  </div>
             </div>
