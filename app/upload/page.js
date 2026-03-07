@@ -11,8 +11,8 @@ export default function CreatePost() {
   // --- 1. DATA STATE ---
   const [metaData, setMetaData] = useState({ 
       title: "", 
-      author: "Tom and Jerry", 
-      authorRole: "Vibe Coder", 
+      author: "Dr. Sanchari Banerjee", 
+      authorRole: "A writer of joy", 
       authorBio: "",
       authorImage: "",
       category: "Tech" 
